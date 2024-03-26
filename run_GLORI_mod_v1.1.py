@@ -5,8 +5,9 @@
 """Input: [.fastq]"""
 """
 History:
-    mod_v1.1:
+    mod_v1.1: 240326
         1) use awk to do A-G change
+        2) make '-g' parameter usable for m6A_caller.py
     mod_v1.0: 
         1) Add comments; 
         2) not delete Important tmp files!!
@@ -240,10 +241,10 @@ def get_sites(chr):
             shell=True)
     print("python "+NStoolsdir+"m6A_caller.py -i "+file_format + " -o " + file_sites +" -c " + Cov +" -C "+ Counts + " -r "\
                     + minRatio +" -p "+pvalue+" -s "+multiAratio+" -R "+AGRatio +" --cutoff " + Acutoffs +" --CR "+ \
-                    background+" --method " + statmethod)
+                    background+" --method " + statmethod + " -g " + geneCR)
     subprocess.call("python "+NStoolsdir+"m6A_caller.py -i "+file_format + " -o " + file_sites +" -c " + Cov +" -C "+ Counts + " -r "\
                     + minRatio +" -p "+pvalue+" -s "+multiAratio+" -R "+AGRatio +" --cutoff " + Acutoffs +" --CR "+ \
-                    background+" --method " + statmethod,shell=True)
+                    background+" --method " + statmethod + " -g " + geneCR,shell=True)
 
 
 if __name__ == "__main__":
