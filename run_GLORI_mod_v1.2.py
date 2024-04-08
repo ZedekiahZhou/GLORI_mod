@@ -45,7 +45,7 @@ def run_command(file,combine,untreated,rvs_fac,Threads):
     # mapping!
     if Mapping:
         print("\n[%s] Mapping ========" % strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-        mapping_1 = "python "+NStoolsdir+"mapping_reads_v1.1.py -i " + NStoolsdir + " -q "+ file +" -p "+ Threads + " -f "+ genome+ ' --FilterN '+FilterN
+        mapping_1 = "python "+NStoolsdir+"mapping_reads_v1.2.py -i " + NStoolsdir + " -q "+ file +" -p "+ Threads + " -f "+ genome+ ' --FilterN '+FilterN
         mapping_2 = " -mulMax " + mulMax + " -t " + tool + " -m " + mismatch +" -pre "+ prx+ " -o " + outputdir
         if untreated:
             file3 = outputprefix + "_un_s.bam"
@@ -275,7 +275,7 @@ if __name__ == "__main__":
 
     group_mappingfilter.add_argument("-F", "--FilterN", nargs="?", type=str, default=0.5, help="The setting for the STAR parameter --outFilterScoreMinOverLread")
     group_mappingfilter.add_argument("-b", "--baseanno", nargs="?", type=str, default='None', help="Annotations at single-base resolution")
-    group_mappingfilter.add_argument("-t", "--tools", nargs="?", type=str, default='STAR',  choices=['STAR', 'bowtie'],
+    group_mappingfilter.add_argument("-t", "--tools", nargs="?", type=str, default='STAR',  choices=['STAR', 'bowtie', 'bowtie2'],
                                      help="We recommend using STAR for genome alignment and Bowtie for transcriptome alignment.")
     group_mappingfilter.add_argument("-T", "--Threads", nargs="?", type=str, default='1',help="Used threads")
     group_mappingfilter.add_argument("-mulMax", "--mulMax", nargs="?", type=str, default='1',help="Suppress all alignments if > <int> exist")
