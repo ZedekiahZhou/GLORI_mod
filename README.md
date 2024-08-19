@@ -1,12 +1,14 @@
 # GLORI_mod
 **A modified GLORI data processing pipeline, based on the original one from [liucongcas](https://github.com/Liucongcas/GLORI-tools/)**
 
-This pipeline performed several modifications below based on the original codes:
+This pipeline performed several modifications bellow based on the original codes:
 
 1. use awk to do AtoG change and reversion, which is faster than python
 2. Add comments, reformat log file, keep Important tmp files
 3. fix bugs: 
     1. When coverge is < 15 for specifi segment (eg. chrM), pandas throw an error when output *.totalCR.txt, add an if-else to advoid.
+    2. keep ".fa" suffix when generating reference, thus compatible with untreated mode
+    3. remove memory para when building reference index
 
 **Below is the original readme:**
 
@@ -72,13 +74,17 @@ pysam,pandas,argparse,time,collections,os,sys,re,subprocess,multiprocessing,copy
 
 ### 2. get reference for reads alignment (required)
 
+only keep chromosomes in fasta file:
+
+```seqkit grep -i -r -p '^>chr[0-9XYM]+$' hg38.fa -o hg38_chr_only.fa ```
+
 #### 2.1 build genome index using STAR
 
-* ``` python ./pipelines/build_genome_index.py -f $genome_fastafile -p 20 -pre hg38 ```
+* ``` python ./pipelines/build_genome_index.py -f $genome_fastafile -p 20 -pre hg38_chr_only.fa ```
 
 you will get:
-* $ hg38.rvsCom.fa
-* $ hg38.AG_conversion.fa
+* $ hg38_chr_only.fa.rvsCom.fa
+* $ hg38_chr_only.fa.AG_conversion.fa
 * the corresponding index from STAR
 
 #### 2.2 build transcriptome index using bowtie
@@ -132,9 +138,9 @@ GLORI-tools takes cleaned reads as input and finally reports files for the conve
 | :--- |
 | Thread=1 |
 | genomdir=your_dir |
-| genome=${genomdir}/hg38.AG_conversion.fa |
-| genome2=${genomdir}/hg38.fa |
-| rvsgenome=${genomdir}/hg38.revCom.fa |
+| genome=${genomdir}/hg38_chr_only.fa.AG_conversion.fa |
+| genome2=${genomdir}/hg38_chr_only.fa |
+| rvsgenome=${genomdir}/hg38_chr_only.fa.revCom.fa |
 | TfGenome=${genomdir}/GCF_000001405.39_GRCh38.p13_rna2.fa.AG_conversion.fa |
 | annodir=your_dir |
 | baseanno=${annodir}/GCF_000001405.39_GRCh38.p13_genomic.gtf_change2Ens.tbl2.noredundance.base |
