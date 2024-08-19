@@ -52,7 +52,7 @@ GLORI-tools is written in Python3 and is executed from the command line. To inst
 * python ≥ v3.8.3
 
 ### GLORI-tools needs the following python package to be installed:
-pysam,pandas,argparse,time,collections,os,sys,re,subprocess,multiprocessing,copy,numpy,scipy,math,sqlite3,Bio,statsmodels,itertools,heapq,glob,signal
+pysam,pandas,argparse,time,collections,os,sys,re,subprocess,multiprocessing,copy,numpy,scipy (v1.10.0),math,sqlite3,Bio,statsmodels,itertools,heapq,glob,signal
 
 ## Example and Usage:
 
