@@ -15,7 +15,7 @@ def get_genelist(list,list_gene):
 	with open(options.input,'r') as gtf:
 		line = gtf.readline()
 		while(line):
-      if line.startswith("#"):
+			if line.startswith("#"):
 				line = gtf.readline()
 				continue
 			row = line.strip().split("\t")
