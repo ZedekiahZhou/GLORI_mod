@@ -298,8 +298,8 @@ if __name__ == "__main__":
                             is used to exclude false positives located in regions resistant to nitrite treatment")
     group_site.add_argument("-R", "--var_ratio", dest="var_ratio", default='0.8', type=str,
                             help="The A+G coverage divided by the total coverage is used to exclude mapping errors")
-    group_site.add_argument("-g", "--gene_CR", dest="gene_CR", default='0.2', type=str,
-                            help="Any m6A sites within a gene with an A-to-G conversion rate below the cutoff will be discarded")
+    group_site.add_argument("-g", "--gene_nonCR", dest="gene_nonCR", default='0.2', type=str,
+                            help="Any m6A sites within a gene with an non-conversion (A-to-G) rate below the cutoff will be discarded")
     group_site.add_argument("-N", "--AG", dest="AG_number", default=0, type=int,
                             help="Any m6A sites within a gene with an A+G coverage below the cutoff will be discarded")
 
